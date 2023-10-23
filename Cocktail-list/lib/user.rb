@@ -1,4 +1,2 @@
-def test 
-    hello
-    
+class User < ActiveRecord::Base
 end

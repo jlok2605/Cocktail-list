@@ -1,2 +1,2 @@
-def hello
+class SavedCocktails < ActiveRecord::Base
 end
