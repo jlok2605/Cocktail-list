@@ -20,7 +20,23 @@ class Run
 
             if choice.downcase == ".exit"
                 is_running = false
+                system("clear")
                 puts "Now exiting the program"
+                
+                
+            elsif choice.downcase == ".random"
+                system("clear")
+                puts "Random cocktail generating..."
+               
+                
+            elsif choice.downcase == ".list"
+                system("clear")
+                puts "This is your list of saved cocktails:"
+                
+            
+            else 
+                puts "Invalid input please select from the options provided"
+                
             end
     end
 end
