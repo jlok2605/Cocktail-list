@@ -15,13 +15,16 @@ request = Net::HTTP::Get.new(path)
 
 response = http.request(request)
 
-if response.code =='200'
+
+
+if response.code == '200'
     data = JSON.parse(response.body)
-    puts JSON.pretty_generate(data)
+    filtered_data = data.select { |key, value| !value.nil? }
+    puts JSON.pretty_generate(filtered_data)
 else
     puts "Error"
 end
-
+ 
 # class cocktailAPI
 #     def self.get_random_cocktail
 #         url = "www.thecocktaildb.com/api/json/v1/1/random.php"
