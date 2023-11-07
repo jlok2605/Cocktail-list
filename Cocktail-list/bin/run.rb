@@ -43,15 +43,14 @@ class Run
     puts "Would you like to add this cocktail to your list?(Y/N)"
     input = gets.chomp
 
-    if input.upcase =="Y"
+    if input.downcase =="y"
         puts "You have saved cocktail_name to your list"
-    else input.upcase ="N"
+    else input.downcase =="n"
         puts "Would you like another random cocktail? (Y/N)"
         input = gets.chomp
-        if input.upcase =="Y"
-            CocktailAPI.get_random_cocktail
-
-        elsif input.upcase ="N"
+        if input.downcase =="y"
+            random
+        elsif input.downcase =="n"
             puts "Now quitting to menu"
 
         else puts "Incorrect value please select either Y or N"
