@@ -5,5 +5,4 @@ ActiveRecord::Base.establish_connection(
     :database => "./config/cocktail.db"
 )
 
-require_relative "../lib/user"
 require_relative "../lib/saved_cocktails"
