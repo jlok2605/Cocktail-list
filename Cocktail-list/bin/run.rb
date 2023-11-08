@@ -37,40 +37,51 @@ class Run
   end
 
   def random
-    CocktailAPI.get_random_cocktail
-    puts "Would you like to add this cocktail to your list?(Y/N)"
-    input = gets.chomp
+    is_random = true
+    while is_random
+      CocktailAPI.get_random_cocktail
+      puts "Would you like to add this cocktail to your list? (Y/N)"
+      input = gets.chomp
 
-    if input.downcase =="y"
-        @save_cocktail
-    else input.downcase =="n"
+      case input.downcase 
+      when "y"
+        puts "Your cocktail has been saved"
         puts "Would you like another random cocktail? (Y/N)"
         input = gets.chomp
         if input.downcase =="y"
-            random
+          
         elsif input.downcase =="n"
-            puts "Now quitting to menu"
-
-        else puts "Incorrect value please select either Y or N"
+          puts "quitting to menu"
+          is_random = false
+        else
+          puts "Incorrect value. Please select either Y or N"
+          #NEED TO REPRINT OPTIONS
         end
-    end
-
-    def save_cocktail(name,ingredients) 
-      @saved_cocktails<<{name: name, ingredients: ingredients}
-      puts " #{name}has been saved."
-    end
-
-    def list
-      puts "Here is your cocktail list:"
-      @saved_cocktails.each_with_index do |cocktail, i|
-        puts "#{i+1}. Name: #{cocktail[:name]}"
-        puts "Ingredients:"
-        cocktail [:ingredients].each {|ingredient|puts ingredient}
-    end
- 
+          
+      when "n"
+        puts "Would you like another random cocktail? (Y/N)"
+        input = gets.chomp
+        choice_input
+        
+      else
+        puts "Incorrect value. Please select either Y or N"
+        input = gets.chomp
+        choice_input
+      end
+      def choice_input
+        if input.downcase =="y"
+          CocktailAPI.get_random_cocktail
+        elsif input.downcase =="n"
+          puts "quitting to menu"
+          is_random = false
+        else
+          puts "Incorrect value. Please select either Y or N"
+          input = gets.chomp
+        end
+        
+      end
     end
   end
 end
-
 run_program = Run.new
 run_program.run
