@@ -1,2 +1,2 @@
-class SavedCocktails < ActiveRecord::Base
+class SavedCocktail < ActiveRecord::Base
 end

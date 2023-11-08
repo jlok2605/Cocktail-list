@@ -19,21 +19,21 @@ class CocktailAPI
 
         if response.code == '200'
             data = JSON.parse(response.body)
-            filtered_data = data["drinks"][0].reject { |key, value| value.nil? }
-            filtered_json = JSON.generate({ "drinks": [filtered_data] })
-        
-
-            puts filtered_json
+            drink_data = data["drinks"]
+        if drink_data
+            name = drink_data[0]["strDrink"]
+            ingredients = (1..15).map { |i| drink_data[0]["strIngredient#{i}"] }.compact
+                
+              puts "Your random cocktail is:"
+              puts "Name: #{name}"
+              puts "Ingredients:"
+              ingredients.each { |ingredient| puts ingredient }
+            else
+              puts "No drink data found in the response."
+            end
+            
         else
             puts "Error"
         end
     end
 end
- 
-# class cocktailAPI
-#     def self.get_random_cocktail
-#         url = "www.thecocktaildb.com/api/json/v1/1/random.php"
-#         uri = URI.parse(url)
-#     end
-# end
-

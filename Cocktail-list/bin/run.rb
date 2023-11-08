@@ -29,8 +29,7 @@ class Run
         random
       elsif choice == ".list"
         system("clear")
-        puts "This is your list of saved cocktails:"
-        # Implement listing saved cocktails logic here
+        list
       else
         puts "Invalid input. Please select from the options provided."
       end
@@ -38,13 +37,12 @@ class Run
   end
 
   def random
-    puts "Your random cocktail is:"
     CocktailAPI.get_random_cocktail
     puts "Would you like to add this cocktail to your list?(Y/N)"
     input = gets.chomp
 
     if input.downcase =="y"
-        puts "You have saved cocktail_name to your list"
+        @save_cocktail
     else input.downcase =="n"
         puts "Would you like another random cocktail? (Y/N)"
         input = gets.chomp
@@ -56,8 +54,22 @@ class Run
         else puts "Incorrect value please select either Y or N"
         end
     end
-    
+
+    def save_cocktail(name,ingredients) 
+      @saved_cocktails<<{name: name, ingredients: ingredients}
+      puts " #{name}has been saved."
     end
+
+    def list
+      puts "Here is your cocktail list:"
+      @saved_cocktails.each_with_index do |cocktail, i|
+        puts "#{i+1}. Name: #{cocktail[:name]}"
+        puts "Ingredients:"
+        cocktail [:ingredients].each {|ingredient|puts ingredient}
+    end
+ 
+    end
+  end
 end
 
 run_program = Run.new
