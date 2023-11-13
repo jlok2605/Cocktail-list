@@ -36,50 +36,37 @@ class Run
     end
   end
 
-  def random
-    is_random = true
-    while is_random
+    def random
+    @is_random = true
+    while @is_random
       CocktailAPI.get_random_cocktail
       puts "Would you like to add this cocktail to your list? (Y/N)"
-      input = gets.chomp
-
-      case input.downcase 
-      when "y"
-        puts "Your cocktail has been saved"
-        puts "Would you like another random cocktail? (Y/N)"
-        input = gets.chomp
-        if input.downcase =="y"
-          
-        elsif input.downcase =="n"
-          puts "quitting to menu"
-          is_random = false
-        else
-          puts "Incorrect value. Please select either Y or N"
-          #NEED TO REPRINT OPTIONS
-        end
-          
-      when "n"
-        puts "Would you like another random cocktail? (Y/N)"
-        input = gets.chomp
-        choice_input
-        
-      else
+      input = gets.chomp.downcase
+      case input
+        when "y"
+          puts "Your cocktail has been saved."
+          puts "Would you like another random cocktail? (Y/N)"
+          another_random_cocktail
+        when "n"
+          puts "Would you like another random cocktail? (Y/N)"
+          another_random_cocktail
+        else 
         puts "Incorrect value. Please select either Y or N"
-        input = gets.chomp
-        choice_input
-      end
-      def choice_input
-        if input.downcase =="y"
-          CocktailAPI.get_random_cocktail
-        elsif input.downcase =="n"
-          puts "quitting to menu"
-          is_random = false
-        else
-          puts "Incorrect value. Please select either Y or N"
-          input = gets.chomp
-        end
+        input
         
+        end
       end
+  end
+
+  def another_random_cocktail
+    input = gets.chomp.downcase
+    if input == 'y'
+    elsif input=='n'
+      @is_random = false
+    else
+      puts "Incorrect value. Please select either Y or N"
+      input 
+      another_random_cocktail
     end
   end
 end
