@@ -19,17 +19,17 @@ class CocktailAPI
 
         if response.code == '200'
             data = JSON.parse(response.body)
+        
             drink_data = data["drinks"]
         if drink_data
             name = drink_data[0]["strDrink"]
-            ingredients = (1..15).map { |i| drink_data[0]["strIngredient#{i}"] }.compact
-                
-              puts "Your random cocktail is:"
-              puts "Name: #{name}"
-              puts "Ingredients:"
-              ingredients.each { |ingredient| puts ingredient }
+            ingredients = (1..15).map { |i| drink_data[0]["strIngredient#{i}"] }.compact    
+            puts "Your random cocktail is:"
+            puts "Name: #{name}"
+            puts "Ingredients:"
+            ingredients = ingredients.each { |ingredient| puts ingredient }
             else
-              puts "No drink data found in the response."
+            puts "No drink data found in the response."
             end
             
         else
